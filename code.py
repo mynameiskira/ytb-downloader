@@ -6,9 +6,9 @@
 from pytube import YouTube
 
 #Asking for all the video links
-n = int(input("Enter the number of youtube videos to download:   "))
+n = int(input("Combien de vidéos voulez-vous télecharger :   "))
 links=[]
-print("\nEnter all the links one per line:")
+print("\nVeuillez entrer les liens des vidéos à télecharger ( 1 lien par ligne ):")
 
 for i in range(0,n):
     temp = input()
@@ -18,21 +18,21 @@ for i in range(0,n):
 for i in range(0,n):
     link = links[i]
     yt = YouTube(link)
-    print("\nDetails for Video",i+1,"\n")
-    print("Title of video:   ",yt.title)
-    print("Number of views:  ",yt.views)
-    print("Length of video:  ",yt.length,"seconds")
+    print("\nDétails de la vidéo :",i+1,"\n")
+    print("Titre de la video:   ",yt.title)
+    print("Nombre de vues:  ",yt.views)
+    print("Durée de la vidéo:  ",yt.length,"seconds")
     stream = str(yt.streams.filter(progressive=True))
     stream = stream[1:]
     stream = stream[:-1]
     streamlist = stream.split(", ")
-    print("\nAll available options for downloads:\n")
+    print("\nDifférentes résolutions:\n")
     for i in range(0,len(streamlist)):
         st = streamlist[i].split(" ")
         print(i+1,") ",st[1]," and ",st[3],sep='')
-    tag = int(input("\nEnter the itag of your preferred stream to download:   "))
+    tag = int(input("\nQuelle résolution voulez-vous télecharger :   "))
     ys = yt.streams.get_by_itag(tag)
-    print("\nDownloading...")
+    print("\nEn télèchargement...")
     ys.download()
-    print("\nDownload completed!!")
+    print("\nVidéo télechargée!!")
     print()
